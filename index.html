@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PROFESSIONAL SOFTWARE — производитель профессионального программного обеспечения для бизнеса и частных пользователей." />
+    <meta name="theme-color" content="#0056D2" />
+    <script>
+      // Определяем базовый серверный путь НАДЁЖНО:
+      // Отсекаем всё после известных SPA-роутов из pathname.
+      // /master/products/nimbus-vault-cloud → /master
+      // /master/ → /master
+      // / → (пусто)
+      (function(){
+        var known = ['products','pricing','solutions','blog','support','about','contact','login','account','checkout','admin'];
+        var parts = location.pathname.replace(/\/+$/,'').split('/').filter(Boolean);
+        var base = [];
+        for (var i = 0; i < parts.length; i++) {
+          if (known.indexOf(parts[i]) !== -1) break;
+          base.push(parts[i]);
+        }
+        window.__PS_BASE = base.length ? '/' + base.join('/') : '';
+        // Фавикон
+        var fi = document.createElement('link');
+        fi.rel = 'icon';
+        fi.href = window.__PS_BASE + '/site-assets.php?type=favicon';
+        document.head.appendChild(fi);
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <title>PROFESSIONAL SOFTWARE — Профессиональное ПО для бизнеса</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Трекер посетителей
+      var ts = document.createElement('script');
+      ts.src = (window.__PS_BASE || '') + '/tracker.js';
+      ts.defer = true;
+      document.body.appendChild(ts);
+    </script>
+  </body>
+</html>

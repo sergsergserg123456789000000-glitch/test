@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --color-brand-50: #E6F0FF;
+  --color-brand-100: #C7DBFE;
+  --color-brand-200: #9CBAFC;
+  --color-brand-300: #6B95F8;
+  --color-brand-400: #3D75F0;
+  --color-brand-500: #1A57E6;
+  --color-brand-600: #0056D2;
+  --color-brand-700: #0043A3;
+  --color-brand-800: #003278;
+  --color-brand-900: #001E47;
+  --color-cta-500: #FF6B00;
+  --color-cta-600: #E55F00;
+}
+
+/* Динамические цвета из админки — переопределяются через root.style.setProperty() */
+:root {
+  --ps-primary: #0056D2;
+  --ps-cta: #FF6B00;
+  --ps-text: #1A1A1A;
+  --ps-bg: #FFFFFF;
+  --ps-bg-layer: #FFFFFF;
+}
+
+/* ===== Кастомная цветовая схема из админки ===== */
+/* Каждое правило с полным селектором — без CSS nesting для совместимости */
+
+/* PRIMARY — фоны */
+html[data-theme="custom"] .bg-blue-600 { background-color: var(--ps-primary) !important; }
+html[data-theme="custom"] .bg-blue-700 { background-color: var(--ps-dark) !important; }
+html[data-theme="custom"] .bg-blue-500 { background-color: var(--ps-light) !important; }
+html[data-theme="custom"] .bg-blue-50  { background-color: var(--ps-50) !important; }
+html[data-theme="custom"] .bg-blue-100 { background-color: var(--ps-100) !important; }
+html[data-theme="custom"] .hover\:bg-blue-700:hover { background-color: var(--ps-dark) !important; }
+html[data-theme="custom"] .hover\:bg-blue-600:hover { background-color: var(--ps-primary) !important; }
+html[data-theme="custom"] .hover\:bg-blue-50:hover  { background-color: var(--ps-50) !important; }
+
+/* PRIMARY — текст */
+html[data-theme="custom"] .text-blue-600 { color: var(--ps-primary) !important; }
+html[data-theme="custom"] .text-blue-700 { color: var(--ps-dark) !important; }
+html[data-theme="custom"] .text-blue-500 { color: var(--ps-light) !important; }
+html[data-theme="custom"] .hover\:text-blue-600:hover { color: var(--ps-primary) !important; }
+html[data-theme="custom"] .hover\:text-blue-700:hover { color: var(--ps-dark) !important; }
+html[data-theme="custom"] .group:hover .group-hover\:text-blue-600 { color: var(--ps-primary) !important; }
+
+/* PRIMARY — границы */
+html[data-theme="custom"] .border-blue-600 { border-color: var(--ps-primary) !important; }
+html[data-theme="custom"] .border-blue-200 { border-color: var(--ps-100) !important; }
+html[data-theme="custom"] .border-blue-300 { border-color: var(--ps-100) !important; }
+html[data-theme="custom"] .hover\:border-blue-300:hover { border-color: var(--ps-primary) !important; }
+html[data-theme="custom"] .focus\:border-blue-500:focus { border-color: var(--ps-primary) !important; }
+
+/* CTA — оранжевые кнопки */
+html[data-theme="custom"] .bg-orange-500 { background-color: var(--ps-cta) !important; }
+html[data-theme="custom"] .bg-orange-600 { background-color: var(--ps-cta-dark) !important; }
+html[data-theme="custom"] .hover\:bg-orange-600:hover { background-color: var(--ps-cta-dark) !important; }
+html[data-theme="custom"] .text-orange-500 { color: var(--ps-cta) !important; }
+html[data-theme="custom"] .text-orange-600 { color: var(--ps-cta) !important; }
+html[data-theme="custom"] .text-orange-700 { color: var(--ps-cta-dark) !important; }
+html[data-theme="custom"] .fill-orange-500 { fill: var(--ps-cta) !important; }
+
+/* Фон сайта из админки. Карточки остаются белыми, фоновые секции становятся прозрачнее. */
+html[data-theme="custom"] body { background: var(--ps-bg-layer) !important; }
+html[data-theme="custom"] .site-shell { background: var(--ps-bg-layer) !important; }
+html[data-theme="custom"] .site-shell > main > section.bg-slate-50,
+html[data-theme="custom"] .site-shell > main > section.bg-white { background: transparent !important; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  color: #1A1A1A;
+  background-color: #FFFFFF;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F9FA;
+}
+::-webkit-scrollbar-thumb {
+  background: #C7DBFE;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9CBAFC;
+}
+
+/* Utility classes */
+.gradient-text {
+  background: linear-gradient(135deg, #0056D2 0%, #1A57E6 50%, #3D75F0 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Градиентный текст в кастомной теме */
+html[data-theme="custom"] .gradient-text {
+  background-image: linear-gradient(135deg, var(--ps-primary), var(--ps-light)) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(0, 86, 210, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 86, 210, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.dot-pattern {
+  background-image: radial-gradient(rgba(0, 86, 210, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 86, 210, 0.4); }
+  50% { box-shadow: 0 0 0 16px rgba(0, 86, 210, 0); }
+}
+.animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+.animate-blob { animation: blob 12s ease-in-out infinite; }
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
